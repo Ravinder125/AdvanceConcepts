@@ -1,0 +1,233 @@
+/* COLUMN LAYOUT IN CSS */
+/* The CSS multi-column layout allows easy defintion of multiple olumns of text - just like in newspaper*/
+
+/* column-count
+column-gap
+column-rule-style
+column-rule-width
+column-rule-color
+column-rule
+column-span
+column-width */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+div {
+    padding: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-transform: capitalize;
+    font-style: oblique;
+}
+
+div:first-child>p {
+    column-count: 3;
+    column-rule-color: red;
+    column-width: 20px;
+    column-rule-style: dashed;
+    column-gap: 50px;
+    text-align: justify;
+    /* column-rule: 2px solid red; */
+}
+
+/* aspect-retio : It will adjust the widht or height of a div, box or a image if it has declared with or height */
+div:nth-child(2)>p {
+    background-color: red;
+    height: 100px;
+    aspect-ratio: 1;
+    margin: 5px;
+}
+
+
+/* NEW CSS FEATURES CSS */
+
+/* The border-inline css property is a shoarthand property for setting the individual logical block border property values in a single place in the style sheet. */
+
+/* border-inline: 1px solid red */
+/* this property is a shorthand for the following CSS properties: *
+border-inline-color
+border-inline-sytle
+border-inline-width */
+
+/*? The border-block CSS property is a shorthand property for setting the indiviudal logical block border pproperty
+ values in a single place in the style sheet. */
+/* border-block : 1px solid red */
+/* This property is a shorthand for the follwoing CSS properties:
+ border-block-color
+ border-block-style
+ border-block-width */
+
+
+div:nth-child(2)>p {
+    /* border-top: 5px solid red;
+    border-bottom: 5px solid red; */
+    border-block: 5px solid green;
+
+    /* border-left: 5px solid yellowgreen;
+    border-right: 5px solid yellowgreen; */
+    border-inline: 5px solid yellowgreen;
+}
+
+
+/* CSS Nesting: The CSS nesting module defines a syntax for nesting selectors, proding the ability to nest one sytle rule inside another, with the selector of the child rule relative to the selctor of the parent rule. */
+
+/*? The writing-mode property secifies whether lines of text are laid out horizontally or vertically */
+/* writing-mode: horizontal-tb/vertical-rl/vertical-lr; */
+
+
+div:nth-child(3) {
+    & p {
+        color: bisque;
+        font-size: x-large;
+        writing-mode: sideways-rl;
+        position: absolute;
+        transform: translate(-50% -50%);
+        right: 50%;
+        top: 50%;
+
+        &::before {
+            content: "This is awsome";
+        }
+
+        &::after {
+            content: "This is fucking awesome";
+        }
+    }
+
+    & h1,
+    h2 {
+        color: palegreen;
+        font-size: 16px;
+    }
+}
+
+
+/* LATEST PSEUODO CLASSES
+/* !important -> https://caniuse.com/ */
+
+/*? :is() Pseudo-Class (or :match()):
+The :is() pseudo-class allows you to select elements that match any of the provided selectors.
+It's particularly useful when you want to apply the same styles to multiple selectors without repeating the styles. */
+
+/*? :where() Pseudo-Class:
+The :where() pseudo-class is similar to :is() and allows you to select each match any of the provided selectors.
+It's typicaally used when you want to group selectors without applying spelling
+
+/* :is, :has, :not, :where */
+
+/* Examples of :is */
+
+/* ul li, 
+ol li,
+dl li {
+color: red;
+}
+
+/* :is(ul, ol, dl) li  {
+color: red;
+}
+
+/* ul li a,
+ul li p,
+ul li h1 : {
+color: red; 
+}
+
+*/
+/* :is(ul) li :is(a, p, h1)  */
+
+/* ul li a,
+ol li a,
+dl li a {
+color:red;
+}
+*/
+
+/* :is(ul, ol, dl) li a {
+    color: red;
+} */
+
+
+/* ul li,
+ul a,
+ul p {
+    color: red;
+} */
+
+/* ul:is(li, a, p) {
+    color: red;
+} */
+
+
+.section-about .grid h1,
+.section-about .grid p,
+.section-testimonial .grid h1,
+.section-testimonial .grid p {
+    color: #fff;
+}
+
+:is(.section-about, .section-testimonial) .grid :is(h1, p, h1) {
+    color: #fff;
+}
+
+/* NOTE : You can you use :where instead of :is both are same but :is has more specificity even than the origin one  */
+
+/* CONDITION : If parent has an checkbox and it's checked then if it has label and button then change their color to blue */
+.parent {
+    &:has([type="checkbox"]:checked) :is(label, button) {
+        color: blue
+    }
+}
+
+/* change the checkbox color to green */
+
+input[type="checkbox"] {
+    accent-color: green;
+    width: 50px;
+    aspect-ratio: 1;
+}
+
+
+header {
+    /* padding: 20px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Poppins, sans-serif;
+    background-color: azure;
+
+    /* & :not(h1, ul, li:first-child) {
+        padding: 10px;
+        border: 1px solid;
+    } */
+
+    h1 {
+        padding-left: 10px;
+    }
+
+    & ul {
+
+        display: flex;
+
+
+        & li {
+            /* padding-left: 20px */
+            border: 1px solid;
+            list-style-type: none;
+            padding: 20px;
+
+            &:hover {
+                cursor: pointer;
+                color: #666;
+                /* background-color: red */
+            }
+
+            &:first-child {
+                padding-left: 0;
+            }
+        }
+    }
+}
