@@ -4,11 +4,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Welcome to Ravi EduHub, Your gateway to knowledge and skill development. We are dedicated toproviding high-quality,accessible education for learners of all ages and background">
+    <meta name="keywords" content="thapatechnical, htmlcourse, csscourse, mern">
+    <meta name="robots" content="index, follow">
+    <!-- if you want to show some suggested page on searching the web as well but if you don't want it then then add no like this "noindex" -->
+    <!-- <meta name="robots" content="noindex, nofollow"> -->
     <title>RAVINDER'S EDIHUB </title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="assets/images/development.png" type="image/x-icon">
+    <style>
+        /***** navbar Section *****/
+
+        .section-navbar {
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        }
+
+        .section-navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 2.4rem;
+
+            & .navbar-brand {
+                display: flex;
+                justify-content: center;
+
+
+                & a img {
+                    width: 80%;
+                    height: auto;
+                }
+            }
+        }
+
+        .section-navbar .navbar ul {
+            display: flex;
+            gap: 3.2rem;
+
+            & li a {
+                color: var(--heading-color);
+                text-transform: uppercase;
+                font-weight: 600;
+                display: inline-block;
+                font-size: 1.6rem;
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -0.3rem;
+                    left: 0;
+                    width: 0%;
+                    border-bottom: 0.2rem solid var(--main-color);
+                }
+
+
+            }
+
+            & li a:hover::after {
+                width: 100%;
+                transition: var(--transition);
+                -webkit-transition: var(--transition);
+                -moz-transition: var(--transition);
+                -ms-transition: var(--transition);
+                -o-transition: var(--transition);
+            }
+        }
+
+        /***** End navbar Section *****/
+
+        /***** hero Section *****/
+
+        main {
+            position: relative;
+            background-image: linear-gradient(to top right,
+                    #3d86fa,
+                    #4484fb,
+                    #679eff,
+                    #b3d2ff,
+                    #ebf3fe);
+        }
+
+        .section-hero--image {
+            width: 100%;
+            height: auto;
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -ms-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
+
+            & figure>img {
+                width: 77rem;
+                height: auto;
+            }
+        }
+
+        .section-hero .grid {
+            align-items: center;
+            gap: 6.4rem;
+
+            & .hero-subheading {
+                text-transform: uppercase;
+                letter-spacing: 0.2rem;
+                font-size: 1.7rem;
+                word-spacing: 0.2rem;
+                color: var(--btn-hover-bg-color);
+                font-weight: 700;
+            }
+
+            & .hero-heading {
+                font-size: 5rem;
+                line-height: 1.1;
+                font-weight: 900;
+                font-family: "Jost", sans-serif;
+                color: var(--hero-heading-color);
+            }
+
+            & .hero-para {
+                color: var(--var(--white-color)-color);
+                margin: 2rem 0 4.2rem 0;
+            }
+        }
+
+
+        /* Shape divider */
+        .custom-shape-divider-bottom-1749563415 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            rotate: 180deg;
+        }
+
+        .custom-shape-divider-bottom-1749563415 svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 12rem;
+        }
+
+        .custom-shape-divider-bottom-1749563415 .shape-fill {
+            fill: #FFFFFF;
+        }
+
+        /***** End hero Section *****/
+    </style>
 </head>
 
 <body>
@@ -38,7 +187,7 @@
                             <a class="nav-link" href="blog.html">blog</a>
                         </li>
                         <li class="nav-items">
-                            <a class="nav-link" href="contact.html">contact</a>
+                            <a class="nav-link" href="#section-contact--homepage">contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -63,12 +212,12 @@
                         accessible education for learners of all ages and background
                     </p>
                     <div class="hero-btn">
-                        <a href="services.html" class="btn btn-white">Learn with us</a>
+                        <a href="service.html" class="btn btn-white">Learn with us</a>
                     </div>
                 </div>
                 <div class="section-hero--image">
                     <figure>
-                        <img src="./assets/images/main-hero.png" alt="hero image">
+                        <img src="./assets/images/main-hero1.webp" alt="hero image">
                     </figure>
                 </div>
             </div>
@@ -106,7 +255,7 @@
             <div class="container grid grid-three--cols">
                 <div class="about-div">
                     <div class="icon">
-                        <img src="./assets/images/research.png" alt="">
+                        <img src="./assets/images/research.webp" alt="">
                     </div>
                     <h3 class="section-common--title">Research</h3>
                     <p>We start by learning what you need. We look at what's new and exciting in learning and choose
@@ -116,7 +265,7 @@
 
                 <div class="about-div">
                     <div class="icon">
-                        <img src="./assets/images/development.png" alt="">
+                        <img src="./assets/images/development.webp" alt="">
                     </div>
                     <h3 class="section-common--title">Research</h3>
                     <p>We start by learning what you need. We look at what's new and exciting in learning and choose
@@ -126,7 +275,7 @@
 
                 <div class="about-div">
                     <div class="icon">
-                        <img src="./assets/images/design.png" alt="">
+                        <img src="./assets/images/design.webp" alt="">
                     </div>
                     <h3 class="section-common--title">Research</h3>
                     <p>We start by learning what you need. We look at what's new and exciting in learning and choose
@@ -306,7 +455,7 @@
 
     <!-- ========== Start contact home Section ========== -->
 
-    <div class="section-contact--homepage" id="sectiion-contact--homepage">
+    <div class="section-contact--homepage" id="section-contact--homepage">
         <div class="container grid grid-two--cols">
             <div class="contact-content">
                 <h2 class="contact-title">Let's revolutionize the way you study</h2>
@@ -320,7 +469,7 @@
             </div>
 
             <div class="contact-image">
-                <img src="assets/images/main.png" alt="coding guy">
+                <img src="assets/images/main.webp" alt="coding guy">
             </div>
         </div>
     </div>
