@@ -12,7 +12,7 @@ html {
     font-size: 62.5%;
     scroll-behavior: smooth;
     /* Enable scroll snapping on the parent container */
-    scroll-snap-type: y proximity;
+    /* scroll-snap-type: y proximity; */
 }
 
 h1,
@@ -107,12 +107,12 @@ textarea {
 
 /* Layout */
 
-header,
+/* header,
 main,
 section,
 footer {
     scroll-snap-align: center;
-}
+} */
 
 .container {
     max-width: 142rem;
