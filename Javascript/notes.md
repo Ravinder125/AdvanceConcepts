@@ -2,51 +2,83 @@
 
 ## How JavaScript Works & Execution Context
 
-Everything in JavaScript runs inside an **execution context**.
+JavaScript runs your code in a special environment called an **execution context**. Think of it as a box where your code lives and runs.
 
-### Components of Execution Context
+### What’s Inside an Execution Context?
 
-1. **Memory Component (Variable Environment)**
-    - Stores all variables and functions as key-value pairs.
-    - Example:
-      ```js
-      const a = 2; // 'a' is the key, 2 is the value
-      ```
+1. **Memory (Variable Environment)**
+  - This is where JavaScript keeps track of all your variables and functions.
+  - Example:
+    ```js
+    const a = 2; // 'a' is the name, 2 is the value
+    ```
 
-2. **Code Component (Thread of Execution)**
-    - Executes code one line at a time.
+2. **Code (Thread of Execution)**
+  - This is the part that actually runs your code, one line at a time.
 
 > **Note:**  
-> JavaScript is a **synchronous, single-threaded** language.  
-> - *Single-threaded* means it can execute only one command at a time.  
-> - *Synchronous* means commands are executed in a specific order, one after another.
+> JavaScript is **single-threaded** and **synchronous** by default.  
+> - *Single-threaded*: It does one thing at a time.  
+> - *Synchronous*: It runs each line in order, waiting for one to finish before starting the next.
 
 ---
 
-## How JavaScript is Executed
+## How JavaScript Runs Your Code
 
-- When JavaScript code runs, a **Global Execution Context (GEC)** is created.
-- **Execution Context Creation Phases:**
+- When you start running JavaScript, it creates a **Global Execution Context (GEC)**.
+- Each time you call a function, JavaScript creates a new execution context for that function.
+- Every execution context goes through two steps:
   1. **Memory Creation Phase:**  
-      - Allocates memory for all variables and functions.  
-      - Variables are initialized with `undefined`.  
-      - Functions are stored with their entire code.
+    - JavaScript sets up space for variables and functions.
+    - Variables are set to `undefined` at first.
+    - Functions are stored with their code.
   2. **Code Execution Phase:**  
-      - Code is executed line by line, assigning values and invoking functions.
+    - JavaScript runs your code line by line, updating variables and calling functions.
 
-- **Function Invocation:**  
-  - Each time a function is called, a new execution context is created for it.
-  - This context goes through the same two phases.
-  - When the function finishes, its execution context is removed from the stack, and control returns to where the function was called.
-
-- **Call Stack (also known as Execution Stack, Program Stack, Machine Stack, or Control Stack):**  
-  - The call stack manages the order of execution contexts.
-  - The GEC is pushed first.
-  - Each new function call pushes a new context on top.
-  - When a context finishes, it is popped off the stack.
-  - When all contexts (including the GEC) are done, the stack is empty.
+- **Call Stack:**  
+  - JavaScript uses a "stack" to keep track of which code is running.
+  - The GEC goes on the stack first.
+  - Each function call adds a new context on top.
+  - When a function finishes, its context is removed from the stack.
+  - When the stack is empty, your code is done running.
 
 ---
 
-**Summary:**  
-JavaScript code runs inside execution contexts managed by the call stack (also called Execution Stack, Program Stack, Machine Stack, or Control Stack). Each context has a memory and code component, and JavaScript executes code synchronously, one step at a time.
+**In short:**  
+JavaScript runs code inside execution contexts, managed by a call stack. Each context has a memory part (for variables/functions) and a code part (for running code). JavaScript runs code one step at a time, in order.
+
+---
+
+## Hoisting
+
+- **Hoisting** means JavaScript moves variable and function declarations to the top of their scope before running the code.
+- In the **Memory Creation Phase**:
+  - Variables are set to `undefined`.
+  - Function declarations are stored with their code.
+  - Function expressions and arrow functions are treated like variables and set to `undefined`.
+- This means you can use variables and functions before you write them, but:
+  - Variables will be `undefined` until you assign a value.
+  - Function declarations can be called before they appear in the code.
+  - Function expressions and arrow functions cannot be called before they are defined (they are `undefined`).
+
+**Example:**
+```js
+console.log(a); // undefined
+var a = 10;
+
+foo(); // "Hello"
+function foo() {
+  console.log("Hello");
+}
+
+bar(); // TypeError: bar is not a function
+var bar = function() {
+  console.log("Hi");
+};
+```
+
+**Key Points:**
+- Variable declarations are hoisted and set to `undefined`.
+- Function declarations are hoisted with their code.
+- Function expressions and arrow functions are hoisted as variables (`undefined`).
+- Hoisting happens before your code runs, during the Memory Creation Phase.
