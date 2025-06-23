@@ -167,3 +167,12 @@ console.log(this.b === window.b); // true
   Avoid assigning `undefined` manually to variables.
 
 ---
+
+
+## The Scope Chain, Scope and Lexical Environment
+- Scope of a variable directly depends on Lexical Environment 
+- But But BUT, what is Lexical Environment ? Whenever a Function is invoked a Execution Context is created along with Lexical Environment. Lexical Environment is local Memory with the Lexical Environment of its parent.
+- Having a reference of parent's lexical environment means We can access all the variables and function defined in the local Memory of its parent lexical environment
+- The Js Engine first searchers for a variables in local Memory, guess what it didn't get it, so now it will find in its parent Lexical Envrionment Which is obiviuosly Local Memory of parent, but it didn't get it yet then it will search in the Lexical Environment of parent's parent's Lexical Environment and the sequence goes on until the variable is found in any lexical scope or Lexical Environment becomes Null 
+- Actually Null is Lexical Environment of Global Execution Context
+- The Mechanism of searching variables in the subsequent is knows as Scope Chain. If a variable is not found, then we say variable is not defined
