@@ -82,3 +82,76 @@ var bar = function() {
 - Function declarations are hoisted with their code.
 - Function expressions and arrow functions are hoisted as variables (`undefined`).
 - Hoisting happens before your code runs, during the Memory Creation Phase.
+
+
+## How Functions Work
+
+- Whenever a function is invoked, it creates a brand new Execution Context that is pushed onto the top of the Call Stack.
+- The new Execution Context executes in two phases: Memory Creation and Code Execution.
+- In the Memory Creation Phase, all variables and inside the function and its parameters are allocated memory and set to `undefined`, while function declarations are stored with their code.
+- In the Code Execution Phase, the code inside the function runs line by line.
+- When the function finishes executing, its Execution Context is removed from the Call Stack.
+
+## The Shortest Program in JavaScript
+
+- The shortest valid JavaScript program is simply an empty file.
+- **Why?**  
+  Even if your file has no code, JavaScript still creates a **Global Execution Context (GEC)** when it runs.
+- The GEC sets up:
+  - **Global Memory Space** (for variables and functions)
+  - The **Global Object** (e.g., `window` in browsers, `global` in Node.js)
+- This setup happens automatically, whether or not you write any code.
+
+**Example:**  
+Suppose you have an empty file, `empty.js`:
+
+```js
+// (empty file)
+```
+
+If you run this in a browser console, you can still access the global object:
+
+```js
+console.log(window); // Outputs the global window object
+console.log(this);   // In the global scope, 'this' refers to 'window'
+```
+
+---
+
+### What is Global Space and `this`?
+
+- **Global Space**:  
+  The memory area where all variables and functions declared outside of any function live.
+- If a variable is declared outside any function, it's in the global space.
+
+**Example:**
+
+```js
+var a = 10;
+function greet() {
+  console.log("Hello!");
+}
+```
+
+- Both `a` and `greet` are in the global space.
+
+- In browsers:
+  - The global object is `window`.
+  - Variables and functions in the global space become properties of `window`.
+  - The keyword `this` in the global scope refers to `window`.
+
+**Example:**
+
+```js
+var b = 20;
+console.log(window.b); // 20
+console.log(this.b);   // 20
+console.log(this.b === window.b); // true
+```
+
+**Key Points:**
+- The global execution context is created even for an empty file.
+- The global object (`window` in browsers) is always available.
+- Variables/functions in the global space are accessible via `window` or `this` in the global scope.
+- `this.a === window.a` is `true` for variables declared with `var` in the global scope.
+
