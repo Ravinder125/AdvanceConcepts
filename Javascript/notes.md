@@ -173,6 +173,19 @@ console.log(this.b === window.b); // true
 - Scope of a variable directly depends on Lexical Environment 
 - But But BUT, what is Lexical Environment ? Whenever a Function is invoked a Execution Context is created along with Lexical Environment. Lexical Environment is local Memory with the Lexical Environment of its parent.
 - Having a reference of parent's lexical environment means We can access all the variables and function defined in the local Memory of its parent lexical environment
-- The Js Engine first searchers for a variables in local Memory, guess what it didn't get it, so now it will find in its parent Lexical Envrionment Which is obiviuosly Local Memory of parent, but it didn't get it yet then it will search in the Lexical Environment of parent's parent's Lexical Environment and the sequence goes on until the variable is found in any lexical scope or Lexical Environment becomes Null 
+- The Js Engine first searchers for a variables in local Memory, guess what it didn't get it, so now it will find in its parent Lexical Environment Which is obviously Local Memory of parent, but it didn't get it yet then it will search in the Lexical Environment of parent's parent's Lexical Environment and the sequence goes on until the variable is found in any lexical scope or Lexical Environment becomes Null 
 - Actually Null is Lexical Environment of Global Execution Context
 - The Mechanism of searching variables in the subsequent is knows as Scope Chain. If a variable is not found, then we say variable is not defined
+
+
+## Let, Const and Temporal Dead Zone (TDZ)
+
+- First Question are let and const are hoisted in Javascript, but with the crucial difference from var. While they are hoisted to top of their scope (block of function), they are not initialized with a default value like undefined. Instead they remain in a "temporal dead zone" (TDZ) until the actual line of code where they are declared is reached during execution. Accessing a let or const variable before its declaration within a TDZ results in a ReferenceError.
+- let and cost are hoisted but we can't use them before initialization is because of "temporal dead zone"
+- Js use different Memory to than GEC to store let and const. Means they are not in a Global Object window and global scope so we can't access them before initialization.
+- var - No Temporal Dead Zone, can be re-declare and re-initialized, stored in GEC.
+- let - use TDZ, can't be redeclare but re-initialized.
+- const - use TDZ, MORE STRICT So it can't be re-initialized and re-declare.
+- syntaxError - Violation of Javascript Syntax
+- typeError - While trying to re-initialize const variable
+- referenceError - While trying to access variable which is not there in global Memory.
