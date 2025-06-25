@@ -30,6 +30,10 @@ string = reversedString.join(",")
 const str = "Sachin"
 const str2 = `${str.charAt(0)}${str.slice(1)}`
 
+
+const longStr = "Hello bhai kaise ho"
+longStr.split(" ").reverse().map((e) => e.split('').reverse().join('')).join(' ')
+
 console.log(reversedArr)
 console.log(string)
 console.log(str2)
