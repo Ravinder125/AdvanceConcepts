@@ -1,4 +1,4 @@
-Namaste Javascript 
+In-Depth JavasScript Fundaments by Namaste Javascript 
 
 ## Table of Contents
 1. [Execution Context](#1-execution-context)
@@ -10,6 +10,7 @@ Namaste Javascript
 7. [`let`, `const`, `var`, and Temporal Dead Zone (TDZ)](#7-let-const-var-and-temporal-dead-zone-tdz)
 8. [Block Scope and Shadowing](#8-block-scope-and-shadowing)
 9. [Closures](#9-closures)
+10. [Closures with setTimeout (Interview Question)](#10-closures-with-settimeout-interview-question)
 
 ---
 
@@ -242,3 +243,65 @@ for (let j = 0; j < 3; j++) {
 
 **Summary:**  
 Closures are a fundamental concept in JavaScript, enabling powerful patterns such as data hiding, function factories, memoization, and maintaining state across asynchronous operations.
+
+---
+
+### 10. Closures with setTimeout (Interview Question)
+
+This is a classic JavaScript interview question that demonstrates how closures interact with asynchronous code, especially inside loops.
+
+#### Problem Example
+
+```js
+(function () {  
+  for (var i = 1; i <= 5; i++) {
+    setTimeout(() => console.log(i), i * 1000);
+  }
+})();
+```
+**Output:**  
+After 1s, 2s, 3s, 4s, and 5s, it prints `6` five times.
+
+**Why?**  
+- `var` is function-scoped, so there is only one `i` variable shared by all iterations.
+- By the time the callbacks run, the loop has finished and `i` is `6`.
+- Each callback "closes over" the same `i` variable, not its value at the time of iteration.
+
+#### Solution 1: Use `let` (block scope)
+
+```js
+(function () {
+  for (let i = 1; i <= 5; i++) {
+    setTimeout(() => console.log(i), i * 1000);
+  }
+})();
+```
+**Output:**  
+Prints `1`, `2`, `3`, `4`, `5` at 1s intervals.
+
+**Why?**  
+- `let` is block-scoped, so each iteration gets a new binding of `i`.
+- Each callback closes over its own copy of `i`.
+
+#### Solution 2: IIFE to capture value
+
+```js
+(function () {
+  for (var i = 1; i <= 5; i++) {
+    (function(j) {
+      setTimeout(() => console.log(j), j * 1000);
+    })(i);
+  }
+})();
+```
+**Output:**  
+Prints `1`, `2`, `3`, `4`, `5` at 1s intervals.
+
+**Why?**  
+- The IIFE (Immediately Invoked Function Expression) creates a new scope for each iteration.
+- The current value of `i` is passed as `j`, so each callback closes over its own `j`.
+
+#### Key Takeaways
+- Closures "remember" variables, not their values at a specific time.
+- Use `let` or an IIFE to capture the correct value in asynchronous callbacks inside loops.
+- Understanding this pattern is essential for writing correct asynchronous JavaScript.
