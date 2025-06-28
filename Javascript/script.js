@@ -39,17 +39,38 @@
 // console.log(str2)
 
 
-for (var i = 1; i <= 5; i++) {
-    function close(x) {
-        setTimeout(() => {
-            console.log(x)
-        }, x * 1000);
-    }
-    close(i)
-}
+// for (var i = 1; i <= 5; i++) {
+//     function close(x) {
+//         setTimeout(() => {
+//             console.log(x)
+//         }, x * 1000);
+//     }
+//     close(i)
+// }
 
-// var i = 3 
+
+
+// var i = 3
 // ;(function (){
 //     i = 5
 //     console.log(i)
 // })()
+
+
+const outer = () => {
+    var a = 3
+
+    return inner = () => {
+        a++
+        console.log(a)
+    }
+}
+
+
+outer()()
+
+const counter = outer()
+counter()
+counter()
+counter()
+counter()

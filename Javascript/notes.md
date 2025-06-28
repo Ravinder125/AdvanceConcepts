@@ -11,6 +11,7 @@ In-Depth JavasScript Fundaments by Namaste Javascript
 8. [Block Scope and Shadowing](#8-block-scope-and-shadowing)
 9. [Closures](#9-closures)
 10. [Closures with setTimeout (Interview Question)](#10-closures-with-settimeout-interview-question)
+11. [Function Statement, Expression, Anonymous, Named Expression, and First Class Functions](#11-function-statement-expression-anonymous-named-expression-and-first-class-functions)
 
 ---
 
@@ -305,3 +306,81 @@ Prints `1`, `2`, `3`, `4`, `5` at 1s intervals.
 - Closures "remember" variables, not their values at a specific time.
 - Use `let` or an IIFE to capture the correct value in asynchronous callbacks inside loops.
 - Understanding this pattern is essential for writing correct asynchronous JavaScript.
+
+
+## 11. Function Statement, Expression, Anonymous, Named Expression, and First Class Functions
+
+### Function Statement (Function Declaration)
+- **Definition:** Declaring a function using the `function` keyword with a name.
+- **Hoisting:** Yes, can be called before its declaration due to hoisting.
+- **Syntax Example:**
+  ```js
+  function greet() {
+    console.log("Hello!");
+  }
+  greet(); // "Hello!"
+  ```
+
+### Function Expression
+- **Definition:** Assigning a function to a variable.
+- **Hoisting:** No, cannot be called before assignment.
+- **Syntax Example:**
+  ```js
+  const sayHi = function() {
+    console.log("Hi!");
+  };
+  sayHi(); // "Hi!"
+  ```
+
+### Anonymous Function
+- **Definition:** A function without a name.
+- **Usage:** Often used as function expressions or returned from other functions.
+- **Syntax Example:**
+  ```js
+  const anon = function() {
+    console.log("Anonymous!");
+  };
+  anon(); // "Anonymous!"
+  ```
+
+### Named Function Expression
+- **Definition:** A function expression with a name.
+- **Scope:** The name is only accessible inside the function itself.
+- **Syntax Example:**
+  ```js
+  const example = function namedFunc() {
+    // namedFunc is only accessible here
+    console.log("Named Function Expression");
+  };
+  example(); // "Named Function Expression"
+  // namedFunc(); // ReferenceError
+  ```
+
+### First Class Functions (First Class Citizens)
+- **Definition:** Functions in JavaScript are treated as values.
+- **Capabilities:**
+  - Can be assigned to variables.
+  - Can be passed as arguments to other functions.
+  - Can be returned from other functions.
+  - Can be stored in data structures.
+- **Example:**
+  ```js
+  function run(fn) {
+    fn();
+  }
+  run(function() {
+    console.log("First class function!");
+  });
+  ```
+
+**Summary Table:**
+
+| Concept                    | Hoisted | Can be Anonymous | Can be Named | Usage Example                                      |
+|----------------------------|---------|------------------|--------------|----------------------------------------------------|
+| Function Statement         | Yes     | No               | Yes          | `function foo() {}`                                |
+| Function Expression        | No      | Yes              | Yes          | `const bar = function() {}`                        |
+| Anonymous Function         | N/A     | Yes              | No           | `const fn = function() {}`                         |
+| Named Function Expression  | No      | No               | Yes          | `const baz = function qux() {}`                    |
+| First Class Functions      | N/A     | Yes              | Yes          | `run(function() {})`                               |
+
+---
