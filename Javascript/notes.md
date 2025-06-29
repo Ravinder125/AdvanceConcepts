@@ -425,5 +425,40 @@ Prints `1`, `2`, `3`, `4`, `5` at 1s intervals.
   setupListener();
   ```
 
+  - **Avoid Main Thread Blocking:**  
+  JavaScript runs on a single main thread, which manages user interactions, rendering, and script execution. Performing heavy computations or synchronous operations on this thread can block the UI, causing the application to freeze and become unresponsive. To handle this, use asynchronous techniques such as callbacks, promises, or async/await to defer work. For CPU-intensive tasks, consider offloading them to web workers, which run in the background and keep the main thread free. This approach ensures the main thread stays responsive, providing a smooth user experience.
+
+  **Example:**  
+  ```js
+  // Bad: Blocks the main thread
+  function heavyComputation() {
+    let sum = 0;
+    for (let i = 0; i < 1e9; i++) {
+      sum += i;
+    }
+    return sum;
+  }
+  heavyComputation(); // UI freezes
+
+  // Good: Offload to a Web Worker
+  // main.js
+  const worker = new Worker('worker.js');
+  worker.postMessage('start');
+  worker.onmessage = (e) => {
+    console.log('Result:', e.data);
+  };
+
+  // worker.js
+  self.onmessage = function() {
+    let sum = 0;
+    for (let i = 0; i < 1e9; i++) {
+      sum += i;
+    }
+    self.postMessage(sum);
+  };
+  ```
+  In this example, the heavy computation is moved to a Web Worker, so the main thread remains responsive.
+
+
 **Summary:**  
 Callback functions are fundamental to JavaScript's asynchronous and event-driven programming style. They enable powerful patterns for handling events, asynchronous operations, and encapsulating logic.
