@@ -12,13 +12,14 @@ In-Depth JavasScript Fundaments by Namaste Javascript
 9. [Closures](#9-closures)
 10. [Closures with setTimeout (Interview Question)](#10-closures-with-settimeout-interview-question)
 11. [Function Statement, Expression, Anonymous, Named Expression, and First Class Functions](#11-function-statement-expression-anonymous-named-expression-and-first-class-functions)
+12. [Callback Functions](#12-callback-functions)
 
 ---
 
 ## JavaScript: Execution Context, Hoisting, Scope, and Global Space — Key Notes (with Examples)
 
 ### 1. Execution Context
-- **Definition:** The environment in which JavaScript code is evaluated and executed.
+- **Definition:** The environment where JavaScript code is evaluated and executed.
 - **Components:**
   - **Memory/Variable Environment:** Stores variables and function declarations.
   - **Code/Thread of Execution:** Executes code line by line.
@@ -178,6 +179,7 @@ console.log(x); // 1
 ```
 
 ---
+
 ### 9. Closures
 - **Definition:** A closure is a function that "remembers" the environment in which it was created, even after that environment has gone.
 - **How It Works:** When a function is returned from another function, it retains access to the variables and parameters of its outer (enclosing) function, forming a closure.
@@ -307,6 +309,7 @@ Prints `1`, `2`, `3`, `4`, `5` at 1s intervals.
 - Use `let` or an IIFE to capture the correct value in asynchronous callbacks inside loops.
 - Understanding this pattern is essential for writing correct asynchronous JavaScript.
 
+---
 
 ## 11. Function Statement, Expression, Anonymous, Named Expression, and First Class Functions
 
@@ -384,3 +387,43 @@ Prints `1`, `2`, `3`, `4`, `5` at 1s intervals.
 | First Class Functions      | N/A     | Yes              | Yes          | `run(function() {})`                               |
 
 ---
+
+### 12. Callback Functions
+
+- **Definition:** A callback function is a function passed as an argument to another function, to be executed later.
+- **Why?** JavaScript functions are first-class citizens, so they can be passed around as values.
+- **Common Use Cases:**
+  - Asynchronous operations (e.g., `setTimeout`, event listeners, AJAX calls)
+  - Array methods (`map`, `filter`, `forEach`, etc.)
+- **setTimeout Example:**  
+  `setTimeout` is a browser API that takes a callback function and a delay. The callback is executed after the delay, but JavaScript remains single-threaded and non-blocking.
+  ```js
+  setTimeout(function() {
+    console.log("Executed after 1 second");
+  }, 1000);
+  ```
+- **Event Listener Example:**  
+  Event listeners also use callbacks. They can be memory-intensive, so it's good practice to remove them when not needed.
+  ```js
+  function handleClick() {
+    console.log("Button clicked!");
+  }
+  button.addEventListener("click", handleClick);
+  // Later, to remove:
+  button.removeEventListener("click", handleClick);
+  ```
+- **Closures with Callbacks:**  
+  Wrapping event listeners or asynchronous logic in a function can create closures, allowing private state or secure data encapsulation.
+  ```js
+  function setupListener() {
+    let count = 0;
+    button.addEventListener("click", function() {
+      count++;
+      console.log(`Clicked ${count} times`);
+    });
+  }
+  setupListener();
+  ```
+
+**Summary:**  
+Callback functions are fundamental to JavaScript's asynchronous and event-driven programming style. They enable powerful patterns for handling events, asynchronous operations, and encapsulating logic.
