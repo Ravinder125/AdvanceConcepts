@@ -469,12 +469,26 @@ Callback functions are fundamental to JavaScript's asynchronous and event-driven
   The event loop is a core mechanism in JavaScript that enables non-blocking, asynchronous behavior by coordinating the execution of code, events, and callbacks.
 
 #### How the Event Loop Works
-
 1. **Call Stack:** Executes synchronous code line by line.
-2. **Web APIs:** Asynchronous operations (like `setTimeout`, DOM events, AJAX, Promises) are handled outside the call stack by browser or Node.js APIs.
-3. **Callback Queue (Task Queue):** When async operations (e.g., `setTimeout`, event handlers) complete, their callbacks are placed in the callback queue.
-4. **Microtask Queue:** Microtasks (e.g., resolved Promises, MutationObservers) are placed in the microtask queue, which has higher priority than the callback queue.
+2. **Web APIs:** Asynchronous operations (like `setTimeout`, DOM events, AJAX, Promises) are handled outside the call stack by browser or Node.js APIs. When such an operation is invoked, the JavaScript engine delegates it to the Web API environment, which manages the operation independently of the main thread.
+3. **Callback Storage:** When an asynchronous operation completes, its callback is not immediately executed. Instead, the callback is first stored in a queue:
+  - **Callback Queue (Task Queue):** For most async operations like `setTimeout`, event handlers, and AJAX callbacks, the callback is placed in the callback queue (also called the task queue).
+  - **Microtask Queue:** For microtasks such as resolved Promises and MutationObservers, the callback is placed in the microtask queue, which has higher priority than the callback queue.
+4. **Queue Priorities:** The event loop always checks the microtask queue first. If there are any microtasks, they are executed before any callbacks from the callback queue.
 5. **Event Loop:** Continuously checks if the call stack is empty. If so, it first processes all microtasks in the microtask queue, then processes one callback from the callback queue.
+6. **Callback Starvation:** If microtasks are continuously scheduled (for example, a resolved Promise schedules another Promise in its `.then`), the microtask queue can keep filling up, preventing the event loop from ever reaching the callback queue. This is called "callback starvation" or "starvation of the task queue," where callbacks like `setTimeout` may be delayed indefinitely because microtasks always have higher priority and are processed first.
+
+**Example of Callback Starvation:**
+```js
+function starve() {
+  Promise.resolve().then(starve);
+}
+starve();
+setTimeout(() => {
+  console.log("This will never run!");
+}, 0);
+```
+In this example, the microtask queue is never empty, so the `setTimeout` callback never gets a chance to execute.
 
 #### Example
 
