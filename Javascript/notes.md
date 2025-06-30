@@ -462,3 +462,56 @@ Prints `1`, `2`, `3`, `4`, `5` at 1s intervals.
 
 **Summary:**  
 Callback functions are fundamental to JavaScript's asynchronous and event-driven programming style. They enable powerful patterns for handling events, asynchronous operations, and encapsulating logic.
+
+### Event Loop, Callback Queue, and Microtask Queue
+
+- **Event Loop:**  
+  The event loop is a core mechanism in JavaScript that enables non-blocking, asynchronous behavior by coordinating the execution of code, events, and callbacks.
+
+#### How the Event Loop Works
+
+1. **Call Stack:** Executes synchronous code line by line.
+2. **Web APIs:** Asynchronous operations (like `setTimeout`, DOM events, AJAX, Promises) are handled outside the call stack by browser or Node.js APIs.
+3. **Callback Queue (Task Queue):** When async operations (e.g., `setTimeout`, event handlers) complete, their callbacks are placed in the callback queue.
+4. **Microtask Queue:** Microtasks (e.g., resolved Promises, MutationObservers) are placed in the microtask queue, which has higher priority than the callback queue.
+5. **Event Loop:** Continuously checks if the call stack is empty. If so, it first processes all microtasks in the microtask queue, then processes one callback from the callback queue.
+
+#### Example
+
+```js
+console.log("Start");
+setTimeout(() => {
+  console.log("Timeout Callback");
+}, 0);
+Promise.resolve().then(() => {
+  console.log("Promise Microtask");
+});
+console.log("End");
+```
+
+**Output:**
+```
+Start
+End
+Promise Microtask
+Timeout Callback
+```
+
+**Explanation:**
+- Synchronous code runs first: "Start" and "End".
+- The Promise's `.then` callback (a microtask) runs before the `setTimeout` callback (a macrotask), even though both are scheduled after the synchronous code.
+
+#### Key Points
+
+- **Microtasks (Promises, MutationObservers) always run before macrotasks (setTimeout, setInterval, I/O events) after the current stack is empty.**
+- The event loop ensures the UI remains responsive by deferring async callbacks until the stack is clear.
+- Use microtasks for operations that must happen immediately after the current operation, before any rendering or I/O callbacks.
+
+#### Best Practices
+
+- Avoid blocking the call stack with heavy synchronous code.
+- Use asynchronous patterns (Promises, async/await, callbacks) to keep applications responsive.
+- Be aware that microtasks can starve the callback queue if scheduled recursively.
+
+**Summary:**  
+The event loop, callback queue, and microtask queue together enable JavaScript's powerful asynchronous programming model. Understanding their order and behavior is essential for writing efficient, non-blocking code.
