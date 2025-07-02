@@ -529,3 +529,48 @@ Timeout Callback
 
 **Summary:**  
 The event loop, callback queue, and microtask queue together enable JavaScript's powerful asynchronous programming model. Understanding their order and behavior is essential for writing efficient, non-blocking code.
+
+
+### JavaScript Engine and Runtime Environment
+
+The JavaScript engine is the program that reads and executes JavaScript code. It works inside a runtime environment (like browsers or Node.js), which provides everything needed to run JS.
+
+#### JS Runtime Environment Components
+- **Call Stack:** Tracks function calls and manages execution order.
+- **Memory Heap:** Stores objects, variables, and data.
+- **Event Loop:** Handles asynchronous operations, making sure the call stack is processed efficiently.
+- **Web APIs:** Browser/Node.js features (DOM, AJAX, timers) that JS can use for extra functionality.
+- **Execution Context:** The environment for running code, including scope and variables.
+- **Garbage Collection:** Frees memory by removing data no longer in use.
+
+#### JavaScript Engine Internals
+
+A modern JS engine (like V8, SpiderMonkey, or Chakra) has several key parts:
+
+- **Parser:** Reads JS code and converts it into an Abstract Syntax Tree (AST), which represents the code structure.
+- **Interpreter:** Executes the AST, running code line by line.
+- **Compiler (JIT - Just-In-Time):** Optimizes code by compiling frequently used parts into fast machine code.
+- **Execution:** Runs the optimized code, manages memory, and handles async tasks.
+
+##### Advanced Engine Optimizations
+
+- **Abstract Syntax Tree (AST):** The parsed tree structure of your code, used for analysis and optimization.
+- **Inlining:** Frequently called small functions are inserted directly into the calling code to avoid function call overhead.
+- **Copy Elision:** Avoids unnecessary copying of objects or values, improving performance.
+- **Inline Caching:** Remembers the type of objects used at certain points, speeding up repeated property access.
+- **Garbage Collection:** Uses algorithms (like mark-and-sweep) to automatically reclaim memory.
+
+**Summary Table:**
+
+| Component         | Purpose                                                      |
+|-------------------|-------------------------------------------------------------|
+| Parser            | Converts code to AST                                         |
+| Interpreter       | Executes AST line by line                                    |
+| Compiler (JIT)    | Optimizes and compiles hot code to machine code              |
+| Inlining          | Inserts small functions directly into calling code           |
+| Copy Elision      | Avoids unnecessary copying of data                           |
+| Inline Caching    | Speeds up repeated property access                           |
+| Garbage Collector | Frees memory automatically                                   |
+
+**In short:**  
+The JS engine parses, interprets, and optimizes your code, while the runtime environment provides APIs and manages async operations. Modern engines use advanced techniques like inlining and inline caching to make JavaScript fast.
