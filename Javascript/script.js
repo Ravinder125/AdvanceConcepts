@@ -1,12 +1,12 @@
 // const arr = [1, 2, 3]
 // let reversedArr = []
-// // reversedArr = arr.reduce((prev, curr) => [curr, ...prev]
+// reversedArr = arr.reduce((prev, curr) => [curr, ...prev]
 
-// //     , [])
-// // for (let i = arr.length - 1; i >= 0; i--) {
-// //     reversedArr.push(arr[i])
+//     , [])
+// for (let i = arr.length - 1; i >= 0; i--) {
+//     reversedArr.push(arr[i])
 
-// // }
+// }
 
 // for (let i = 0; i < arr.length; i++) {
 //     reversedArr.unshift(arr[i])
@@ -57,20 +57,59 @@
 // })()
 
 
-const outer = () => {
-    var a = 3
+// const outer = () => {
+//     var a = 3
 
-    return inner = () => {
-        a++
-        console.log(a)
+//     return inner = () => {
+//         a++
+//         console.log(a)
+//     }
+// }
+
+
+// outer()()
+
+// const counter = outer()
+// counter()
+// counter()
+// counter()
+// counter()
+
+
+
+// Modular code example 
+
+
+const radius = [1, 2, 3, 4, 5];
+
+
+const area = (r) => Math.PI * r * r;
+const circumference = (r) => 2 * Math.PI * r;
+const diameter = (r) => 2 * r;
+
+// const calculate = (arr, logic) => {
+//     const output = [];
+//     for (let i = 0; i < arr.length; i++) {
+//         output.push(logic(arr[i]));
+//     }
+
+//     return output;
+// }
+
+
+// console.log(calculate(radius, area));
+// console.log(radius.map(area));
+
+// create our own map function
+Array.prototype.calculate = function (logic) {
+    const output = [];
+    for (let i = 0; i < this.length; i++) {
+        output.push(logic(this[1]));
     }
 }
 
+console.log(radius.calculate(area));
+console.log(radius.calculate(circumference));
+console.log(radius.calculate(diameter));
 
-outer()()
 
-const counter = outer()
-counter()
-counter()
-counter()
-counter()

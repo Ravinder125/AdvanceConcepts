@@ -574,3 +574,97 @@ A modern JS engine (like V8, SpiderMonkey, or Chakra) has several key parts:
 
 **In short:**  
 The JS engine parses, interprets, and optimizes your code, while the runtime environment provides APIs and manages async operations. Modern engines use advanced techniques like inlining and inline caching to make JavaScript fast.
+
+### Issues with `setTimeout`
+
+- **Unpredictable Timing:**  
+  `setTimeout` schedules code to run after a minimum delay, but actual execution depends on the call stack and event loop. If the main thread is busy (e.g., with heavy computation), the callback may be delayed beyond the specified time.
+
+- **Closure Pitfalls:**  
+  When used inside loops with `var`, all callbacks may reference the same variable, leading to unexpected results (see closure examples above).
+
+- **Timer Clamping:**  
+  Browsers may enforce a minimum delay (e.g., 4ms for nested timeouts), so very short intervals may not be precise.
+
+- **Not Guaranteed to Run Exactly On Time:**  
+  The callback is queued after the delay, but if the call stack is not empty, it waits until the stack is clear.
+
+**Example:**
+```js
+console.log("Start");
+setTimeout(() => console.log("Timeout"), 0);
+for (let i = 0; i < 1e8; i++) {} // Heavy computation
+console.log("End");
+// Output: Start, End, Timeout
+```
+Here, "Timeout" is logged after "End" because the main thread was busy.
+
+---
+
+## 13. Higher-Order Functions
+
+- **Definition:**  
+  A higher-order function is a function that takes one or more functions as arguments, returns a function, or both.
+
+- **Why Use Them?**  
+  They enable powerful abstractions, code reuse, and functional programming patterns.
+
+- **Common Examples:**  
+  - Array methods: `map`, `filter`, `reduce`, `forEach`
+  - Event listeners
+  - Function composition and currying
+
+**Example:**
+```js
+function greet(name) {
+  return "Hello, " + name;
+}
+
+function processUserInput(callback) {
+  const name = "Alice";
+  console.log(callback(name));
+}
+
+processUserInput(greet); // Output: Hello, Alice
+```
+
+**Array Example:**
+```js
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(num => num * 2); // [2, 4, 6, 8]
+```
+
+**Summary:**  
+Higher-order functions are a core concept in JavaScript, enabling flexible, modular, and expressive code by treating functions as first-class citizens.
+---
+
+#### Creating a Custom `map` Function with `Array.prototype`
+
+You can create your own version of the `map` function by adding it to `Array.prototype`. This allows all arrays to use your custom `map` method.
+
+**Example:**
+```js
+Array.prototype.myMap = function(callback) {
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    // Check if the index exists (handles sparse arrays)
+    if (this.hasOwnProperty(i)) {
+      result.push(callback(this[i], i, this));
+    }
+  }
+  return result;
+};
+
+// Usage:
+const arr = [1, 2, 3];
+const doubled = arr.myMap(x => x * 2); // [2, 4, 6]
+console.log(doubled);
+```
+
+**How it works:**
+- The custom `myMap` function iterates over the array.
+- For each element, it calls the provided `callback` with the current value, index, and the array itself.
+- The result of each callback call is pushed to a new array, which is returned at the end.
+
+**Note:**  
+It's generally not recommended to modify built-in prototypes in production code, but this is a useful exercise for understanding how array methods work internally.
