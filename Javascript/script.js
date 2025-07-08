@@ -77,39 +77,75 @@
 
 
 
-// Modular code example 
+// Modular code example
 
 
-const radius = [1, 2, 3, 4, 5];
+// const radius = [1, 2, 3, 4, 5];
 
 
-const area = (r) => Math.PI * r * r;
-const circumference = (r) => 2 * Math.PI * r;
-const diameter = (r) => 2 * r;
+// const area = (r) => Math.PI * r * r;
+// const circumference = (r) => 2 * Math.PI * r;
+// const diameter = (r) => 2 * r;
 
-// const calculate = (arr, logic) => {
+// // const calculate = (arr, logic) => {
+// //     const output = [];
+// //     for (let i = 0; i < arr.length; i++) {
+// //         output.push(logic(arr[i]));
+// //     }
+
+// //     return output;
+// // }
+
+
+// // console.log(calculate(radius, area));
+// // console.log(radius.map(area));
+
+// // create our own map function
+// Array.prototype.calculate = function (logic) {
 //     const output = [];
-//     for (let i = 0; i < arr.length; i++) {
-//         output.push(logic(arr[i]));
+//     for (let i = 0; i < this.length; i++) {
+//         output.push(logic(this[1]));
 //     }
-
-//     return output;
 // }
 
+// console.log(radius.calculate(area));
+// console.log(radius.calculate(circumference));
+// console.log(radius.calculate(diameter));
 
-// console.log(calculate(radius, area));
-// console.log(radius.map(area));
 
-// create our own map function
-Array.prototype.calculate = function (logic) {
-    const output = [];
-    for (let i = 0; i < this.length; i++) {
-        output.push(logic(this[1]));
+const users = [
+    { id: 1, firstname: "Alice", lastname: "Smith", age: 25, email: "alice@example.com" },
+    { id: 2, firstname: "Bob", lastname: "Johnson", age: 30, email: "bob@example.com" },
+    { id: 3, firstname: "Charlie", lastname: "Brown", age: 30, email: "charlie@example.com" }
+];
+
+// const output = users.map(({ id, firstname, lastname, age, email }) => ({
+//     id,
+//     fullname: `${firstname} ${lastname}`,
+//     email,
+//     age,
+// }));
+
+// console.log(updatedUsers)
+
+// const ageDivided = users.reduce((acc, curr) => {
+//     acc[curr.age] = acc[curr.age] ? ++acc[curr.age] : 1;
+//     return acc
+// }, {})
+
+// console.log(ageDivided)
+
+// const output = users
+//     .filter((user) => (user.age > 25))
+//     .map((user) => user.firstname)
+// console.log(output)
+
+const output = users.reduce((acc, user) => {
+    if (user.age > 25) {
+        return [...acc, user.firstname]
     }
-}
-
-console.log(radius.calculate(area));
-console.log(radius.calculate(circumference));
-console.log(radius.calculate(diameter));
+    return acc
+}, [])
 
 
+console.log(output)

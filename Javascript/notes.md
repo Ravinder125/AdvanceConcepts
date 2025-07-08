@@ -635,6 +635,9 @@ const doubled = numbers.map(num => num * 2); // [2, 4, 6, 8]
 ```
 
 **Summary:**  
+
+
+
 Higher-order functions are a core concept in JavaScript, enabling flexible, modular, and expressive code by treating functions as first-class citizens.
 ---
 
@@ -668,3 +671,43 @@ console.log(doubled);
 
 **Note:**  
 It's generally not recommended to modify built-in prototypes in production code, but this is a useful exercise for understanding how array methods work internally.
+
+
+
+## Callback Hell and Inversion of control
+ **Callback hell:** Although Callback functions are used for writing asynchronous code but as we know when we pass a function to another function as an argument then it's called Callback function. But it becomes messy when we pass one to another to another to another it is also called Callback hell.
+ **Inversion of Control:** When we create a callback function to another one as a argument then we are actually giving that power to call that function whenever that function want to call that function and Callback function blindly trust that function
+
+
+
+
+## Promises
+**Promises:** Promise is a object representing the eventual completion or failure of an async operation
+- Which solve the problem of callback hell and Inversion of Control
+- Many developers also express it with other definations like - It's a future value etc.
+
+**Example**
+
+```js
+
+//Issue
+// Callback hell
+function(cart, function (){
+  function() {
+    function (){
+      function() {
+        function () {}
+      }
+    }
+  }
+})
+
+// Solution
+// Promise
+fetch()
+.then((id)=> {createInvoice(id)})
+.then(()=> {})
+.then(()=> {})
+.catch(()=> {})
+
+``` 
