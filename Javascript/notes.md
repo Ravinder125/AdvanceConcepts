@@ -674,14 +674,14 @@ It's generally not recommended to modify built-in prototypes in production code,
 
 
 
-## Callback Hell and Inversion of control
+### Callback Hell and Inversion of control
  **Callback hell:** Although Callback functions are used for writing asynchronous code but as we know when we pass a function to another function as an argument then it's called Callback function. But it becomes messy when we pass one to another to another to another it is also called Callback hell.
  **Inversion of Control:** When we create a callback function to another one as a argument then we are actually giving that power to call that function whenever that function want to call that function and Callback function blindly trust that function
 
 
 
 
-## Promises
+## 14. Promises
 **Promises:** Promise is a object representing the eventual completion or failure of an async operation
 - Which solve the problem of callback hell and Inversion of Control
 - Many developers also express it with other definations like - It's a future value etc.
@@ -711,3 +711,28 @@ fetch()
 .catch(()=> {})
 
 ``` 
+
+
+## 15. Promise APIs - Promise.all, allSettled, race, any
+ 
+ -*Promise APIs:*- APIs are crucial for Interviews and everyday application development, especially when handling asynchronous operations like parallel API calls and every Promise api takes an array of promises.
+    -*Promise.all:*
+        1. Promise.all handles multiple promises simultaneously, returning an array of results when all promises are fulfilled, and throwing an error if any promise fails.
+        2. If any of the promise got rejected(failed) then the entire operation will be failed, it won't wait for other promises to resolved but it return the first rejected(failed) promise with error which you can catch with catch.
+    -*Promise.allSettled:*
+        1. Promise.allSettled waits for all promise `Settled`, doesn't matter it's resolved(success, fulfilled) or rejected(failed).
+        2. It suitable for scenarios where partial failures are accepted.
+    -*Promise.race:*
+        1. Promise.race returns the first settled promise doesn't matter whether it is resolved(fulfilled, success) or rejected(failed).
+        2. It is ideal for scenarios where the fastest response it required.
+    -*Promise.any:*-
+        1. It waits for the first Settled fulfilled promise.If first promise fails then it waits for the second one. It is success seeker like us.
+        2. But if all the promise are rejected(failed) then it will return a array, and it is important that it's is called `aggregation error` because this is a array of errors so you have to do console like this - console.error(err.errors).
+        3. It suitable for scenarios where success is prioritized over speed.
+
+
+
+Note:
+- 1. if any promise is rejected then it returns an object of error containing reason of rejection and status.
+
+- 2. Promise terminologies - `settled`, `resolved`, `rejected`, `fulfilled` and `rejected`

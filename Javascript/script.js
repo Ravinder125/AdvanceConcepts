@@ -87,20 +87,20 @@
 // const circumference = (r) => 2 * Math.PI * r;
 // const diameter = (r) => 2 * r;
 
-// // const calculate = (arr, logic) => {
-// //     const output = [];
-// //     for (let i = 0; i < arr.length; i++) {
-// //         output.push(logic(arr[i]));
-// //     }
+// const calculate = (arr, logic) => {
+//     const output = [];
+//     for (let i = 0; i < arr.length; i++) {
+//         output.push(logic(arr[i]));
+//     }
 
-// //     return output;
-// // }
+//     return output;
+// }
 
 
-// // console.log(calculate(radius, area));
-// // console.log(radius.map(area));
+// console.log(calculate(radius, area));
+// console.log(radius.map(area));
 
-// // create our own map function
+// create our own map function
 // Array.prototype.calculate = function (logic) {
 //     const output = [];
 //     for (let i = 0; i < this.length; i++) {
@@ -140,12 +140,66 @@ const users = [
 //     .map((user) => user.firstname)
 // console.log(output)
 
-const output = users.reduce((acc, user) => {
-    if (user.age > 25) {
-        return [...acc, user.firstname]
-    }
-    return acc
-}, [])
+// const output = users.reduce((acc, user) => {
+//     if (user.age > 25) {
+//         return [...acc, user.firstname]
+//     }
+//     return acc
+// }, [])
 
 
-console.log(output)
+// console.log(output)
+
+
+// const haystack = "leetcode", needle = "leeto"
+
+// const findIndex = (haystack, needle) => {
+//     console.log(haystack.indexOf(needle))
+// }
+
+// findIndex(haystack, needle)
+
+// var romanToInt = function (s) {
+//     const symble = {
+//         I: 1,
+//         V: 5,
+//         X: 10,
+//         L: 50,
+//         C: 100,
+//         D: 500,
+//         M: 1000
+//     }
+
+//     return s.split('').map((r) => {
+//         return symble[r]
+//     }).reduce((a, r) => a = a + r)
+// }
+// console.log(romanToInt("LVII"))]
+
+// console.log(Math.floor(Math.sqrt(3)))
+
+// var longestCommonPrefix = function (strs) {
+//     let prefix = []
+//     for (let i = 0; i < strs.length; i++) {
+//         const str = strs[i]
+//         for (let j = 1; j < str.length; j++) {
+//             console.log(strs[j]?.[i] === str[i], strs[j]?.[i], str[i])
+//             if (strs[j]?.[i] === str[i]) {
+//                 if (prefix.includes(str[i])) {
+//                     continue
+//                 }
+//                 console.log(prefix.includes(str[i]))
+//                 prefix.push(str[i])
+//             }
+//         }
+//     }
+//     console.log(prefix)
+// }
+// longestCommonPrefix(["flower", "flow", "flight"])
+
+// var rotateString = function (s, goal) {
+//     const halfLen = Math.floor((s.length) / 2)
+//     return s.slice(halfLen) + s.slice(0, halfLen + 1)
+// };
+// let s = "abcde", goal = "abced"
+// rotateString(s, goal)
